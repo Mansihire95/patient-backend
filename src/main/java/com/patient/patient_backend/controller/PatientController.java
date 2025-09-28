@@ -6,7 +6,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
-
+import java.util.List;
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequiredArgsConstructor
@@ -16,11 +16,16 @@ public class PatientController {
     private final PatientService service;
 
    @PostMapping("/register")
-public ResponseEntity<?> registerPatient(@Valid @RequestBody Patient patient) {
+    public ResponseEntity<?> registerPatient(@Valid @RequestBody Patient patient) {
     System.out.println("📥 Incoming patient: " + patient);
     Patient saved = service.savePatient(patient);
     System.out.println("✅ Saved patient: " + saved);
     return ResponseEntity.status(HttpStatus.CREATED).body(saved);
-}
+    }
 
+
+     @GetMapping("/patients")
+    public ResponseEntity<List<Patient>> getAllPatients() {
+        return ResponseEntity.ok(service.getAllPatients());
+    }
 }

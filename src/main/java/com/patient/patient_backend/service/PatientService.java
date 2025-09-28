@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import com.patient.patient_backend.repository.PatientRepository;
 import com.patient.patient_backend.model.Patient;
 import lombok.RequiredArgsConstructor;
-
+import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class PatientService {
@@ -14,4 +14,11 @@ public class PatientService {
     public Patient savePatient(Patient patient) {
         return repo.save(patient);
     }
+
+
+     public List<Patient> getAllPatients() {
+        return repo.findAll();
+    }
+
+    
 }
